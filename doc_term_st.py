@@ -22,7 +22,7 @@ if ddk == "":
 if ddk != None and not ddk.endswith("%"):
     ddk = ddk + "%"
 
-antall = st.number_input( 'Antall bøker - jo fler jo lenger ventetid, forskjellige søk vil vanligvis gi nye bøker', 10)    
+antall = st.number_input( 'Antall bøker - jo fler jo lenger ventetid, forskjellige søk vil vanligvis gi nye bøker (trykk på +/- for starte nye søk', 10)    
 
 period_slider = st.slider(
     'Angi periode - år mellom 1900 og 2014',
@@ -36,7 +36,8 @@ if words != "":
 
     df = pd.concat([nb.frame(data[w], 'bok_' + w) for w in wordlist], axis = 1)
     
-    st.markdown("### Bøker som inneholder en av ordene _{ws}_ i kolonnene, ordfrekvens i radene".format(ws = ', '.join(wordlist)))
+    st.markdown("### Bøker som inneholder en av _{ws}_ i kolonnene, ordfrekvens i radene".format(ws = ', '.join(wordlist)))
+    st.write('En diagonal indikerer at ordene gjensidig utelukker hverandre')
     st.write(df.loc[wordlist].fillna(0))
 
     
