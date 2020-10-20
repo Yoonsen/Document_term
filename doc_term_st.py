@@ -15,7 +15,7 @@ st.markdown('### Input')
 words = st.text_input('Skriv inn ordene som skal sjekkes adskilt med komma','')
 wordlist = [x.strip() for x in words.split(',')]
 
-ddk = st.text_input('Deweynummer - skriv bare de første sifrene', "")
+ddk = st.text_input('Deweynummer - angi bare de første sifrene', "")
 if ddk == "":
     ddk = None
 
@@ -34,7 +34,7 @@ if words != "":
     urns = {w:nb.book_urn(words=[w], ddk = ddk, period = (period_slider[0], period_slider[1]), limit = antall) for w in wordlist}
     data = {w: nb.aggregate_urns(urns[w]) for w in wordlist}
 
-    df = pd.concat([nb.frame(data[w], 'bok_' + w) for w in wordlist], axis = 1)
+    df = pd.concat([nb.frame(data[w], 'bøker ' + w) for w in wordlist], axis = 1)
     
     st.markdown("### Bøker som inneholder en av _{ws}_ i kolonnene, ordfrekvens i radene".format(ws = ', '.join(wordlist)))
     st.write('En diagonal indikerer at ordene gjensidig utelukker hverandre')
